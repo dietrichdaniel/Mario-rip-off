@@ -28,4 +28,15 @@ __meta__ = {
 [node name="Collision" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 2 )
 
+[node name="HitboxUp" type="Area2D" parent="."]
+position = Vector2( 0, -23.3 )
+collision_layer = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Collision" type="CollisionShape2D" parent="HitboxUp"]
+shape = SubResource( 2 )
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="body_entered" from="HitboxUp" to="." method="_on_HitboxUp_body_entered"]

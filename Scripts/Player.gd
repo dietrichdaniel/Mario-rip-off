@@ -36,6 +36,14 @@ func _physics_process(delta):
 func _on_Hitbox_body_entered(body):
 	if "Enemy" in body.name:
 		body.dead()
-		
-	print(body)
+
+func _on_HitboxUp_body_entered(body):
+	if "SurpriseBox" in body.name:
+		body.activate()
+		print('foi')
+
+
+	
+	pass # Replace with function body.
+	
 	
