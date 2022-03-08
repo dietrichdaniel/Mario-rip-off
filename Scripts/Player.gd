@@ -13,6 +13,7 @@ func _physics_process(delta):
 
 	motion.x = clamp(motion.x,-MAXSPEED,MAXSPEED)
 	
+	
 	motion.y += GRAVITY
 	if motion.y > MAXFALLSPEED:
 		motion.y = MAXFALLSPEED
@@ -32,7 +33,9 @@ func _physics_process(delta):
 	
 	motion = move_and_slide(motion,UP)
 
-
-
-func _ready():
-	pass 
+func _on_Hitbox_body_entered(body):
+	if "Enemy" in body.name:
+		body.dead()
+		
+	print(body)
+	

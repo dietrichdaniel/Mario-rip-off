@@ -7,25 +7,32 @@ const SPEED = 80
 
 var direction = 1 
 var motion = Vector2()
+var is_dead = false
 
 
 func _physics_process(delta):
-	
-	motion.x = SPEED * direction
-	
-	motion.y += GRAVITY
-	if motion.y > MAXFALLSPEED:
-		motion.y = MAXFALLSPEED
+	if is_dead == false:
 
-	motion = move_and_slide(motion,UP)
-	
-	if is_on_wall():
-		direction = direction * -1
-		$RayCast2D.position.x *= -1
+		motion.x = SPEED * direction
 
-	if $RayCast2D.is_colliding() == true:
-		direction = direction * -1
-		$RayCast2D.position.x *= -1
+		motion.y += GRAVITY
+		if motion.y > MAXFALLSPEED:
+			motion.y = MAXFALLSPEED
+
+		motion = move_and_slide(motion,UP)
+
+		if is_on_wall():
+			direction = direction * -1
+			$RayCast2D.position.x *= -1
+
+		if $RayCast2D.is_colliding() == false:
+			direction = direction * -1
+			$RayCast2D.position.x *= -1
 
 func _ready():
 	pass
+
+func dead():
+	is_dead = true
+	motion = Vector2(0,0)
+	
