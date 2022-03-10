@@ -9,11 +9,13 @@ const ACCEL = 10
 
 var motion = Vector2()
 
+
+
 func _physics_process(delta):
 
 	motion.x = clamp(motion.x,-MAXSPEED,MAXSPEED)
-	
-	
+
+#
 	motion.y += GRAVITY
 	if motion.y > MAXFALLSPEED:
 		motion.y = MAXFALLSPEED
@@ -40,10 +42,11 @@ func _on_Hitbox_body_entered(body):
 func _on_HitboxUp_body_entered(body):
 	if "SurpriseBox" in body.name:
 		body.activate()
-		print('foi')
+	
+	if body.is_in_group('Breakable Blocks'):
+		body.queue_free()
 
 
-	
-	pass # Replace with function body.
-	
-	
+func _ready():
+
+	pass
