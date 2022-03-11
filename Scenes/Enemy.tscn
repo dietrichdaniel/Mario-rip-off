@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=["Enemies"]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -21,3 +21,8 @@ cast_to = Vector2( 0, 11 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="DeadTimer" type="Timer" parent="."]
+wait_time = 5.0

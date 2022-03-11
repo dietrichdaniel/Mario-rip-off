@@ -8,9 +8,4 @@ func activate():
 	coin.position = $Position2D.global_position
 	
 	
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	pass 

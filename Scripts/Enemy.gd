@@ -1,9 +1,11 @@
 extends KinematicBody2D
 
+
 const UP = Vector2(0,-1)
-const GRAVITY = 40
-const MAXFALLSPEED = 1000
+const GRAVITY = Global.GRAVITY
+const MAXFALLSPEED = Global.MAXFALLSPEED
 const SPEED = 80
+const C = preload("res://Scenes/Coin.tscn")
 
 var direction = 1 
 var motion = Vector2()
@@ -28,11 +30,18 @@ func _physics_process(delta):
 		if $RayCast2D.is_colliding() == false:
 			direction = direction * -1
 			$RayCast2D.position.x *= -1
+		
 
 func _ready():
 	pass
 
-func dead():
+func _dead():
 	is_dead = true
 	motion = Vector2(0,0)
+	var coin = C.instance()
+	get_parent().get_parent().add_child(coin)
+	coin.global_position = self.global_position
+	queue_free()
 	
+#func _disappear():
+#	pass

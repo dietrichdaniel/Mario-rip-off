@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 const UP = Vector2(0,-1)
-const GRAVITY = 40
-const MAXFALLSPEED = 1000
+const GRAVITY = Global.GRAVITY
+const MAXFALLSPEED = Global.MAXFALLSPEED
 const MAXSPEED = 150
 const JUMPFORCE = 1000
 const ACCEL = 10 
@@ -36,9 +36,11 @@ func _physics_process(delta):
 	motion = move_and_slide(motion,UP)
 
 func _on_Hitbox_body_entered(body):
-	if "Enemy" in body.name:
-		body.dead()
-
+	if body.is_in_group('Enemies'):
+		body._dead()
+		motion.y = -JUMPFORCE / 2 
+		
+		
 func _on_HitboxUp_body_entered(body):
 	if "SurpriseBox" in body.name:
 		body.activate()
