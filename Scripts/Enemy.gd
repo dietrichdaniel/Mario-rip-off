@@ -13,24 +13,31 @@ var is_dead = false
 
 
 func _physics_process(delta):
-	if is_dead == false:
 
-		motion.x = SPEED * direction
+	$AnimationPlayer.play("Walking")
 
-		motion.y += GRAVITY
-		if motion.y > MAXFALLSPEED:
-			motion.y = MAXFALLSPEED
 
-		motion = move_and_slide(motion,UP)
+	if direction == 1:
+		$Sprite.scale.x = 1
+	if direction == -1:
+		$Sprite.scale.x = -1
 
-		if is_on_wall():
-			direction = direction * -1
-			$RayCast2D.position.x *= -1
+	motion.x = SPEED * direction
 
-		if $RayCast2D.is_colliding() == false:
-			direction = direction * -1
-			$RayCast2D.position.x *= -1
-		
+	motion.y += GRAVITY
+	if motion.y > MAXFALLSPEED:
+		motion.y = MAXFALLSPEED
+
+	motion = move_and_slide(motion,UP)
+
+	if is_on_wall():
+		direction = direction * -1
+		$RayCast2D.position.x *= -1
+
+	if $RayCast2D.is_colliding() == false:
+		direction = direction * -1
+		$RayCast2D.position.x *= -1
+
 
 func _ready():
 	pass
@@ -42,6 +49,3 @@ func _dead():
 	get_parent().get_parent().add_child(coin)
 	coin.global_position = self.global_position
 	queue_free()
-	
-#func _disappear():
-#	pass
