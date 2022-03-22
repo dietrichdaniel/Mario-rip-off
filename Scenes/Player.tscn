@@ -1,13 +1,48 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Sprites/Player Sprite.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Player.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 23 )
+extents = Vector2( 8, 15 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Walking"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 0.25 )
+extents = Vector2( 6, 0.25 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 0.25, 13 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -16,13 +51,19 @@ __meta__ = {
 }
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.99, 0.99 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/Walking = SubResource( 4 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-position = Vector2( 0, 23.3 )
+position = Vector2( 0, 15.8 )
 collision_layer = 0
 __meta__ = {
 "_edit_group_": true
@@ -32,7 +73,7 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="HitboxUp" type="Area2D" parent="."]
-position = Vector2( 0, -23.3 )
+position = Vector2( 0, -15.8 )
 collision_layer = 0
 __meta__ = {
 "_edit_group_": true
@@ -41,5 +82,17 @@ __meta__ = {
 [node name="Collision" type="CollisionShape2D" parent="HitboxUp"]
 shape = SubResource( 2 )
 
+[node name="HitboxSides" type="Area2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="HitboxSides"]
+position = Vector2( -8.3, -1 )
+shape = SubResource( 5 )
+
+[node name="Right" type="CollisionShape2D" parent="HitboxSides"]
+position = Vector2( 8.3, -1 )
+shape = SubResource( 5 )
+
+[connection signal="dead" from="." to="." method="_on_Player_dead"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="body_entered" from="HitboxUp" to="." method="_on_HitboxUp_body_entered"]
+[connection signal="body_entered" from="HitboxSides" to="." method="_on_HitboxSides_body_entered"]
