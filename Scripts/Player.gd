@@ -46,7 +46,8 @@ func _on_HitboxUp_body_entered(body):
 		body.activate()
 	
 	if body.is_in_group('Breakable Blocks'):
-		body.queue_free()
+		body._break()
+
 
 
 func _ready():
