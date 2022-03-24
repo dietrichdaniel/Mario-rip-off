@@ -9,7 +9,9 @@ const MAXSPEED = 150
 const JUMPFORCE = 1000
 const ACCEL = 10 
 
+
 var motion = Vector2()
+
 
 func _ready():
 	pass
@@ -37,7 +39,6 @@ func _physics_process(delta):
 		motion.x = lerp(motion.x,0,0.2)
 
 
-
 	if is_on_floor():
 		if Input.is_action_just_pressed("Jump"):
 			motion.y = -JUMPFORCE
@@ -58,6 +59,7 @@ func _physics_process(delta):
 		$AnimationPlayer.stop()
 		$Sprite.set_frame(1)
 
+
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group('Enemies'):
 		body._dead()
@@ -72,15 +74,19 @@ func _on_HitboxUp_body_entered(body):
 		body._break()
 
 
-
 func _on_HitboxSides_body_entered(body):
 	if body.is_in_group('Enemies'):
 		emit_signal("dead")
 
 
 func _on_Player_dead():
-	Global.coin_count = 0
-	get_tree().paused = true
-	yield(get_tree().create_timer(3),"timeout")
-	get_tree().reload_current_scene()
-	get_tree().paused = false
+	if Global.life_count != 1:
+		Global.coin_count = 0
+		Global.life_count -= 1
+		get_tree().paused = true
+		yield(get_tree().create_timer(1.5),"timeout")
+		get_tree().reload_current_scene()
+		get_tree().paused = false
+	else:
+		var game_over = preload ("res://Scenes/GameOver.tscn")
+		get_tree().change_scene_to(game_over)

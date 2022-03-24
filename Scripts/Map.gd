@@ -12,3 +12,7 @@ func _process(delta):
 func _ready():
 	pass 
 
+
+
+func _on_Player_dead():
+	pass # Replace with function body.
