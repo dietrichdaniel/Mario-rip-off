@@ -7,7 +7,7 @@ const MAXFALLSPEED = Global.MAXFALLSPEED
 const SPEED = 80
 const C = preload("res://Scenes/Coin.tscn")
 
-var direction = 1 
+var direction = 1
 var motion = Vector2()
 var is_dead = false
 

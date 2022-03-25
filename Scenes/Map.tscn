@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Sprites/Obstacle Sprite.png" type="Texture" id=2]
+[ext_resource path="res://Ground.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/SurpriseBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Map.gd" type="Script" id=5]
@@ -11,75 +11,72 @@
 [ext_resource path="res://Scripts/HealthSprite.gd" type="Script" id=9]
 [ext_resource path="res://Sprites/Health.png" type="Texture" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 512, 1.5 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 0.5, 298.5 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 256, 30 )
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.117647, 0.654902, 0.862745, 1 )
 
 [node name="Map" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="Limits" type="StaticBody2D" parent="."]
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_styles/panel = SubResource( 1 )
 
-[node name="Down" type="CollisionShape2D" parent="Limits"]
-position = Vector2( 512, 598.5 )
-shape = SubResource( 1 )
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+show_collision = true
+format = 1
+tile_data = PoolIntArray( 262161, 7, 0, 262162, 6, 0, 262163, 6, 0, 262164, 6, 0, 262165, 6, 0, 262166, 6, 0, 262167, 8, 0, 327697, 5, 0, 327698, 3, 0, 327699, 3, 0, 327700, 3, 0, 327701, 3, 0, 327702, 3, 0, 327703, 4, 0, 393220, 7, 0, 393221, 6, 0, 393222, 6, 0, 393223, 6, 0, 393224, 6, 0, 393225, 6, 0, 393226, 6, 0, 393227, 8, 0, 393233, 2, 0, 393234, 1, 0, 393235, 1, 0, 393236, 1, 0, 393237, 1, 0, 393238, 1, 0, 393239, 0, 0, 458756, 2, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 0, 0, 458779, 7, 0, 458780, 6, 0, 458781, 6, 0, 458782, 6, 0, 458783, 6, 0, 524315, 5, 0, 524316, 3, 0, 524317, 3, 0, 524318, 3, 0, 524319, 3, 0, 589851, 5, 0, 589852, 3, 0, 589853, 3, 0, 589854, 3, 0, 589855, 3, 0, 655387, 5, 0, 655388, 3, 0, 655389, 3, 0, 655390, 3, 0, 655391, 3, 0, 720923, 5, 0, 720924, 3, 0, 720925, 3, 0, 720926, 3, 0, 720927, 3, 0, 786459, 5, 0, 786460, 3, 0, 786461, 3, 0, 786462, 3, 0, 786463, 3, 0, 851991, 7, 0, 851992, 6, 0, 851993, 6, 0, 851994, 6, 0, 851995, 6, 0, 851996, 6, 0, 851997, 6, 0, 851998, 6, 0, 851999, 6, 0, 917527, 5, 0, 917528, 3, 0, 917529, 3, 0, 917530, 3, 0, 917531, 3, 0, 917532, 3, 0, 917533, 3, 0, 917534, 3, 0, 917535, 3, 0, 983063, 5, 0, 983064, 3, 0, 983065, 3, 0, 983066, 3, 0, 983067, 3, 0, 983068, 3, 0, 983069, 3, 0, 983070, 3, 0, 983071, 3, 0, 1048576, 6, 0, 1048577, 6, 0, 1048578, 6, 0, 1048579, 6, 0, 1048580, 6, 0, 1048581, 6, 0, 1048582, 6, 0, 1048583, 6, 0, 1048584, 6, 0, 1048585, 6, 0, 1048586, 6, 0, 1048587, 6, 0, 1048588, 6, 0, 1048589, 6, 0, 1048590, 6, 0, 1048591, 6, 0, 1048592, 6, 0, 1048593, 6, 0, 1048594, 6, 0, 1048595, 6, 0, 1048596, 6, 0, 1048597, 6, 0, 1048598, 6, 0, 1048599, 6, 0, 1048600, 6, 0, 1048601, 6, 0, 1048602, 6, 0, 1048603, 6, 0, 1048604, 6, 0, 1048605, 6, 0, 1048606, 6, 0, 1048607, 6, 0, 1114112, 3, 0, 1114113, 3, 0, 1114114, 3, 0, 1114115, 3, 0, 1114116, 3, 0, 1114117, 3, 0, 1114118, 3, 0, 1114119, 3, 0, 1114120, 3, 0, 1114121, 3, 0, 1114122, 3, 0, 1114123, 3, 0, 1114124, 3, 0, 1114125, 3, 0, 1114126, 3, 0, 1114127, 3, 0, 1114128, 3, 0, 1114129, 3, 0, 1114130, 3, 0, 1114131, 3, 0, 1114132, 3, 0, 1114133, 3, 0, 1114134, 3, 0, 1114135, 3, 0, 1114136, 3, 0, 1114137, 3, 0, 1114138, 3, 0, 1114139, 3, 0, 1114140, 3, 0, 1114141, 3, 0, 1114142, 3, 0, 1114143, 3, 0, 1179648, 3, 0, 1179649, 3, 0, 1179650, 3, 0, 1179651, 3, 0, 1179652, 3, 0, 1179653, 3, 0, 1179654, 3, 0, 1179655, 3, 0, 1179656, 3, 0, 1179657, 3, 0, 1179658, 3, 0, 1179659, 3, 0, 1179660, 3, 0, 1179661, 3, 0, 1179662, 3, 0, 1179663, 3, 0, 1179664, 3, 0, 1179665, 3, 0, 1179666, 3, 0, 1179667, 3, 0, 1179668, 3, 0, 1179669, 3, 0, 1179670, 3, 0, 1179671, 3, 0, 1179672, 3, 0, 1179673, 3, 0, 1179674, 3, 0, 1179675, 3, 0, 1179676, 3, 0, 1179677, 3, 0, 1179678, 3, 0, 1179679, 3, 0 )
 
-[node name="Up" type="CollisionShape2D" parent="Limits"]
-position = Vector2( 512, 1 )
-shape = SubResource( 1 )
-
-[node name="Left" type="CollisionShape2D" parent="Limits"]
-position = Vector2( -0.5, 300 )
-shape = SubResource( 2 )
-
-[node name="Right" type="CollisionShape2D" parent="Limits"]
-position = Vector2( 1024.5, 298.5 )
-shape = SubResource( 2 )
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 41, 496 )
 
 [node name="Blocks" type="Node" parent="."]
 
 [node name="SurpriseBox" parent="Blocks" instance=ExtResource( 4 )]
 position = Vector2( 424, 376 )
 
+[node name="SurpriseBox2" parent="Blocks" instance=ExtResource( 4 )]
+position = Vector2( 930, 96 )
+
 [node name="BreakableBlock2" parent="Blocks" instance=ExtResource( 6 )]
 position = Vector2( 484, 376 )
 
-[node name="BreakableBlock" parent="Blocks" instance=ExtResource( 6 )]
+[node name="BreakableBlock3" parent="Blocks" instance=ExtResource( 6 )]
 position = Vector2( 454, 376 )
+
+[node name="BreakableBlock4" parent="Blocks" instance=ExtResource( 6 )]
+position = Vector2( 365, 376 )
+
+[node name="BreakableBlock5" parent="Blocks" instance=ExtResource( 6 )]
+position = Vector2( 275, 376 )
+
+[node name="BreakableBlock6" parent="Blocks" instance=ExtResource( 6 )]
+position = Vector2( 305, 376 )
+
+[node name="BreakableBlock7" parent="Blocks" instance=ExtResource( 6 )]
+position = Vector2( 335, 376 )
+
+[node name="BreakableBlock" parent="Blocks" instance=ExtResource( 6 )]
+position = Vector2( 395, 376 )
 
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 480, 528 )
+position = Vector2( 186, 496 )
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 3 )]
+position = Vector2( 649, 112 )
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 3 )]
+position = Vector2( 250, 176 )
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 864, 232 )
-
-[node name="Obstacle" type="Sprite" parent="."]
-position = Vector2( 520, 568 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Physics" type="StaticBody2D" parent="Obstacle"]
-
-[node name="Collision" type="CollisionShape2D" parent="Obstacle/Physics"]
-shape = SubResource( 3 )
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 200, 144 )
+position = Vector2( 788, 400 )
 
 [node name="Heart" parent="." instance=ExtResource( 8 )]
-position = Vector2( 593, 472 )
+position = Vector2( 300, 128 )
 
 [node name="UI" type="Node" parent="."]
 
